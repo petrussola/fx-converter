@@ -7,7 +7,9 @@ import Body from "./components/body/Body";
 // context
 import { fxContext } from "./context/fx";
 
-const baseUrl = `http://data.fixer.io/api/symbols?access_key=2127905ee66f0256ea24839dafc730f8`;
+const apiKey = process.env.REACT_APP_FIXER_API_KEY;
+
+const baseUrl = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${apiKey}`;
 
 function App() {
   const [currencies, setCurrencies] = useState({});
@@ -21,6 +23,9 @@ function App() {
       });
   }, []);
 
+  if (!apiKey) {
+    return <div>Please add Fixer's API Key</div>;
+  }
   return (
     <div className="App">
       <fxContext.Provider value={{ currencies }}>
