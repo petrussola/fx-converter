@@ -4,7 +4,7 @@ export default function SymbolOption({ symbol }) {
   return (
     <option
       value={symbol}
-      selected={symbol === "United States Dollar (USD)" ? true : false}
+      selected={symbol === "United States Dollar (USD)" && true}
     >
       {symbol}
     </option>
