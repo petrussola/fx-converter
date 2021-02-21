@@ -7,7 +7,10 @@ import SymbolOption from "./SymbolOption";
 import { fxContext } from "../../context/fx";
 
 // helpers
-import { convertCurrenciesIntoArray } from "../../helpers/helpers";
+import {
+  convertCurrenciesIntoArray,
+  findSymbolCurrency,
+} from "../../helpers/helpers";
 
 export default function CurrencyPicker({ defaultCurrency, name }) {
   const {
@@ -19,13 +22,8 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
   const symbols = convertCurrenciesIntoArray(currencies);
 
   const selectCurrency = (e) => {
-    // grab the selected currency
-    const currency = e.target.value;
-    // find position where the currency symbol starts
-    const position = currency.indexOf("(");
-    // grab symbol of currency
-    const iso = currency.substring(position + 1, position + 4);
-    // if selecting base currency, set base currency state
+    const iso = findSymbolCurrency(e.target.value);
+
     if (name === "baseCurrency") {
       return setSelectedBaseCurrency(iso);
     }
