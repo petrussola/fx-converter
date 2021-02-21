@@ -7,27 +7,30 @@ import SymbolOption from "./SymbolOption";
 import { fxContext } from "../../context/fx";
 
 // helpers
-import {
-  convertCurrenciesIntoArray,
-  findSymbolCurrency,
-} from "../../helpers/helpers";
+import { convertCurrenciesIntoArray, grabFx } from "../../helpers/helpers";
 
 export default function CurrencyPicker({ defaultCurrency, name }) {
   const {
     currencies,
+    selectedBaseCurrency,
     setSelectedBaseCurrency,
+    selectedDestinationCurrency,
     setSelectedDestinationCurrency,
   } = useContext(fxContext);
 
   const symbols = convertCurrenciesIntoArray(currencies);
 
-  const selectCurrency = (e) => {
-    // if selector is base currency, set selected base currency state
-    if (name === "baseCurrency") {
-      return setSelectedBaseCurrency(e.target.value);
+  const selectCurrency = async (e) => {
+    try {
+      // call helper function that will call the fx api and return new selected currency state
+      const newSelectedCurrency = await grabFx(e.target.value);
+      // if selector is base currency, set selected base currency state, which comes already shaped as {iso: {{base currency}}, fx: {fx to other symbols}}
+      if (name === "baseCurrency") {
+        setSelectedBaseCurrency(newSelectedCurrency);
+      }
+    } catch (error) {
+      console.log(error.message);
     }
-    // if selection destination currency, set selected destination currency state
-    return setSelectedDestinationCurrency(e.target.value);
   };
 
   return (

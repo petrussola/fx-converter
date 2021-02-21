@@ -20,6 +20,13 @@ const acceptedSymbols = {
   USD: true,
 };
 
+const listCurrencies =
+  "EUR,JPY,BGN,CZK,GBP,HUF,PLN,RON,SEK,CHF,ISK,NOK,HRK,RUB,TRY,AUD,USD";
+
+const apiKey = process.env.REACT_APP_FIXER_API_KEY;
+
+const endpointRate = `${process.env.REACT_APP_FIXER_BASE_URL}/latest?access_key=${apiKey}`;
+
 export const filterCurrencies = (symbols) => {
   // initialise empty object to save currencies that should be used in the app only
   const returnSymbols = {};
@@ -45,11 +52,16 @@ export const convertCurrenciesIntoArray = (currencies) => {
   return symbols;
 };
 
-// export const findSymbolCurrency = (currency) => {
-//   // find position where the currency symbol starts
-//   const position = currency.indexOf("(");
-//   // grab symbol of currency
-//   const iso = currency.substring(position + 1, position + 4);
-//   // if selecting base currency, set base currency state
-//   return iso;
-// };
+export const grabFx = async (selectedBaseCurrency) => {
+  try {
+    // call endpoint with built URL to fetch all fxs using selected currency base
+    const res = await fetch(
+      `${endpointRate}&base=${selectedBaseCurrency}&symbols=${listCurrencies}`
+    );
+    const data = await res.json();
+    // return new state ready to be set as such
+    return { iso: data.base, fx: data.rates };
+  } catch (error) {
+    console.error(error.message);
+  }
+};

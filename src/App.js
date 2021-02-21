@@ -8,15 +8,12 @@ import Body from "./components/body/Body";
 import { fxContext } from "./context/fx";
 
 // helpers
-import { filterCurrencies } from "./helpers/helpers";
+import { filterCurrencies, grabFx } from "./helpers/helpers";
 
 const apiKey = process.env.REACT_APP_FIXER_API_KEY;
 
 const endpointSymbols = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${apiKey}`;
-const endpointRate = `${process.env.REACT_APP_FIXER_BASE_URL}/2013-12-24?access_key=${apiKey}`;
-
-const listCurrencies =
-  "EUR,JPY,BGN,CZK,GBP,HUF,PLN,RON,SEK,CHF,ISK,NOK,HRK,RUB,TRY,AUD";
+const endpointRate = `${process.env.REACT_APP_FIXER_BASE_URL}/latest?access_key=${apiKey}`;
 
 function App() {
   const [currencies, setCurrencies] = useState({});
@@ -27,11 +24,16 @@ function App() {
     "Euro (EUR)"
   );
 
-  const [selectedBaseCurrency, setSelectedBaseCurrency] = useState("USD");
+  const [selectedBaseCurrency, setSelectedBaseCurrency] = useState({
+    iso: "USD",
+    fx: {},
+  });
   const [
     selectedDestinationCurrency,
     setSelectedDestinationCurrency,
-  ] = useState("EUR");
+  ] = useState({ iso: "EUR", fx: {} });
+
+  const changeBaseCurrency = () => {};
 
   const contextStore = {
     currencies,
@@ -41,26 +43,25 @@ function App() {
     setSelectedBaseCurrency,
     selectedDestinationCurrency,
     setSelectedDestinationCurrency,
+    changeBaseCurrency,
   };
 
   useEffect(() => {
-    fetch(endpointSymbols)
-      .then((res) => res.json())
-      .then((data) => {
-        const { symbols } = data;
+    const grabInitialData = async () => {
+      try {
+        // fetch the currency symbols
+        const res = await fetch(endpointSymbols);
+        const { symbols } = await res.json();
+        // const { symbols } = data;
         setCurrencies(filterCurrencies(symbols));
-      });
+        const stateSelectedCurrency = await grabFx(selectedBaseCurrency.iso);
+        setSelectedBaseCurrency(stateSelectedCurrency);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    grabInitialData();
   }, []);
-
-  useEffect(() => {
-    fetch(
-      `${endpointRate}&base=${selectedBaseCurrency}&symbols=${listCurrencies}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }, [selectedBaseCurrency]);
 
   if (!apiKey) {
     return <div>Please add Fixer's API Key</div>;

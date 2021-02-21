@@ -22,9 +22,12 @@ export default function Body() {
 
   return (
     <StyledDiv>
-      <CurrencyBox defaultCurrency={selectedBaseCurrency} name="baseCurrency" />
       <CurrencyBox
-        defaultCurrency={selectedDestinationCurrency}
+        defaultCurrency={selectedBaseCurrency.iso}
+        name="baseCurrency"
+      />
+      <CurrencyBox
+        defaultCurrency={selectedDestinationCurrency.iso}
         name="destinationCurrency"
       />
     </StyledDiv>
