@@ -16,6 +16,19 @@ const endpoint = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${a
 
 function App() {
   const [currencies, setCurrencies] = useState({});
+  const [selectedCurrencyBase, setSelectedCurrencyBase] = useState(
+    "United States Dollar (USD)"
+  );
+  const [
+    selectedCurrencyDestination,
+    setSelectedCurrencyDestination,
+  ] = useState("Euro (EUR)");
+
+  const contextStore = {
+    currencies,
+    selectedCurrencyBase,
+    selectedCurrencyDestination,
+  };
 
   useEffect(() => {
     fetch(endpoint)
@@ -29,9 +42,10 @@ function App() {
   if (!apiKey) {
     return <div>Please add Fixer's API Key</div>;
   }
+  
   return (
     <div className="App">
-      <fxContext.Provider value={{ currencies }}>
+      <fxContext.Provider value={contextStore}>
         <NavBar />
         <Body />
       </fxContext.Provider>
