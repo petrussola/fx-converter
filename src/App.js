@@ -12,7 +12,11 @@ import { filterCurrencies } from "./helpers/helpers";
 
 const apiKey = process.env.REACT_APP_FIXER_API_KEY;
 
-const endpoint = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${apiKey}`;
+const endpointSymbols = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${apiKey}`;
+const endpointRate = `${process.env.REACT_APP_FIXER_BASE_URL}/2013-12-24?access_key=${apiKey}`;
+
+const listCurrencies =
+  "EUR,JPY,BGN,CZK,GBP,HUF,PLN,RON,SEK,CHF,ISK,NOK,HRK,RUB,TRY,AUD";
 
 function App() {
   const [currencies, setCurrencies] = useState({});
@@ -23,28 +27,40 @@ function App() {
     "Euro (EUR)"
   );
 
-  const [selectedBaseCurrency, setSelectedBaseCurrency] = useState(null);
+  const [selectedBaseCurrency, setSelectedBaseCurrency] = useState("USD");
   const [
     selectedDestinationCurrency,
     setSelectedDestinationCurrency,
-  ] = useState(null);
+  ] = useState("EUR");
 
   const contextStore = {
     currencies,
     defaultCurrencyBase,
     defaultCurrencyDestination,
+    selectedBaseCurrency,
     setSelectedBaseCurrency,
+    selectedDestinationCurrency,
     setSelectedDestinationCurrency,
   };
 
   useEffect(() => {
-    fetch(endpoint)
+    fetch(endpointSymbols)
       .then((res) => res.json())
       .then((data) => {
         const { symbols } = data;
         setCurrencies(filterCurrencies(symbols));
       });
   }, []);
+
+  useEffect(() => {
+    fetch(
+      `${endpointRate}&base=${selectedBaseCurrency}&symbols=${listCurrencies}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, [selectedBaseCurrency]);
 
   if (!apiKey) {
     return <div>Please add Fixer's API Key</div>;

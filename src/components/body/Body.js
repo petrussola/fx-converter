@@ -16,15 +16,15 @@ const StyledDiv = styled.div`
 
 export default function Body() {
   // since we use the same component CurrencyBox, we grab default currencies base and destination and pass it down from here as props 'defaultCurrency'
-  const { defaultCurrencyBase, defaultCurrencyDestination } = useContext(
+  const { selectedBaseCurrency, selectedDestinationCurrency } = useContext(
     fxContext
   );
 
   return (
     <StyledDiv>
-      <CurrencyBox defaultCurrency={defaultCurrencyBase} name="baseCurrency" />
+      <CurrencyBox defaultCurrency={selectedBaseCurrency} name="baseCurrency" />
       <CurrencyBox
-        defaultCurrency={defaultCurrencyDestination}
+        defaultCurrency={selectedDestinationCurrency}
         name="destinationCurrency"
       />
     </StyledDiv>

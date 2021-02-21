@@ -22,13 +22,12 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
   const symbols = convertCurrenciesIntoArray(currencies);
 
   const selectCurrency = (e) => {
-    const iso = findSymbolCurrency(e.target.value);
-
+    // if selector is base currency, set selected base currency state
     if (name === "baseCurrency") {
-      return setSelectedBaseCurrency(iso);
+      return setSelectedBaseCurrency(e.target.value);
     }
-    // if selection destination currency, set destination currency state
-    return setSelectedDestinationCurrency(iso);
+    // if selection destination currency, set selected destination currency state
+    return setSelectedDestinationCurrency(e.target.value);
   };
 
   return (
