@@ -33,18 +33,17 @@ export default function AmountField({ defaultCurrency, name }) {
   } = useContext(fxContext);
 
   const changeAmount = (e) => {
-    // convert iput amount to number
-    const inputAmount = parseInt(e.target.value);
     // grab fx of destination currency from state
     const fx = selectedBaseCurrency.fx[selectedDestinationCurrency.iso];
     // call helper function, returns number with 4 decimals
-    const destinationAmount = convertInputAmount(inputAmount, fx);
+    const { base, destination } = convertInputAmount(e.target.value, fx);
+    debugger;
     // track amount typed in the base currency in state and converted amount in destination currency state
     if (name === "baseCurrency") {
-      setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: inputAmount });
+      setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: base });
       setSelectedDestinationCurrency({
         ...selectedDestinationCurrency,
-        typed: destinationAmount,
+        typed: destination,
       });
     }
   };
