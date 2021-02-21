@@ -33,3 +33,13 @@ export const filterCurrencies = (symbols) => {
   }
   return returnSymbols;
 };
+
+export const convertCurrenciesIntoArray = (currencies) => {
+  const symbols = [];
+
+  for (const symbol in currencies) {
+    symbols.push(`${currencies[symbol]} (${symbol})`);
+  }
+
+  return symbols;
+};
