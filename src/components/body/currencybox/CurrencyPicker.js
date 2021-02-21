@@ -1,13 +1,34 @@
 import React, { useContext } from "react";
+import styled from "styled-components";
 
 // components
-import SymbolOption from "./SymbolOption";
+import SymbolOption from "./currencypicker/SymbolOption";
 
 // context
-import { fxContext } from "../../context/fx";
+import { fxContext } from "../../../context/fx";
 
 // helpers
-import { convertCurrenciesIntoArray, grabFx } from "../../helpers/helpers";
+import { convertCurrenciesIntoArray, grabFx } from "../../../helpers/helpers";
+
+const StyledDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin: 0 auto;
+  select {
+    width: 361px;
+    height: 62px;
+    font-size: 21px;
+    border: 1px solid #bfbfbf;
+    border-radius: 6px;
+    padding: 18px;
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png")
+      no-repeat right #ffffff;
+    -webkit-appearance: none;
+    background-position-x: 330px;
+  }
+`;
 
 export default function CurrencyPicker({ defaultCurrency, name }) {
   const {
@@ -39,7 +60,8 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
   };
 
   return (
-    <div>
+    <StyledDiv>
+      <label htmlFor="currencies">Currency</label>
       <select
         name="currencies"
         id="currencies"
@@ -50,6 +72,6 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
           return <SymbolOption key={index} symbol={symbol} />;
         })}
       </select>
-    </div>
+    </StyledDiv>
   );
 }

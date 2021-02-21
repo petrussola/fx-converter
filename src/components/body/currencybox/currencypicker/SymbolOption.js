@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 // context
-import { fxContext } from "../../context/fx";
+import { fxContext } from "../../../../context/fx";
 
 export default function SymbolOption({ symbol }) {
   const { currencies } = useContext(fxContext);
