@@ -56,10 +56,12 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
           ...newSelectedCurrency,
         });
       } else {
+        // call helper function to convert whatever the input amount in base currency state
         const { destination } = convertInputAmount(
           selectedBaseCurrency.typed,
           selectedBaseCurrency.fx[e.target.value]
         );
+        // set converted amount so it displays on screen
         setSelectedDestinationCurrency({
           ...selectedDestinationCurrency,
           iso: e.target.value,

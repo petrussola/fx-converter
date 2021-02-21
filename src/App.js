@@ -8,7 +8,12 @@ import Body from "./components/body/Body";
 import { fxContext } from "./context/fx";
 
 // helpers
-import { filterCurrencies, grabFx, titles } from "./helpers/helpers";
+import {
+  filterCurrencies,
+  grabFx,
+  titles,
+  convertInputAmount,
+} from "./helpers/helpers";
 
 const apiKey = process.env.REACT_APP_FIXER_API_KEY;
 
@@ -64,6 +69,17 @@ function App() {
     };
     grabInitialData();
   }, []);
+
+  useEffect(() => {
+    const { destination } = convertInputAmount(
+      selectedBaseCurrency.typed,
+      selectedBaseCurrency.fx[selectedDestinationCurrency.iso]
+    );
+    setSelectedDestinationCurrency({
+      ...selectedDestinationCurrency,
+      typed: destination,
+    });
+  }, [selectedBaseCurrency.iso]);
 
   if (!apiKey) {
     return <div>Please add Fixer's API Key</div>;
