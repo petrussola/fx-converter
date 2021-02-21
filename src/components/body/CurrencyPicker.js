@@ -14,7 +14,11 @@ export default function CurrencyPicker(props) {
   }
   return (
     <div>
-      <select name="currencies" id="currencies">
+      <select
+        name="currencies"
+        id="currencies"
+        value="United States Dollar (USD)"
+      >
         {symbols.map((symbol, index) => {
           return <SymbolOption key={index} symbol={symbol} />;
         })}

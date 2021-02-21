@@ -7,19 +7,22 @@ import Body from "./components/body/Body";
 // context
 import { fxContext } from "./context/fx";
 
+// helpers
+import { filterCurrencies } from "./helpers/helpers";
+
 const apiKey = process.env.REACT_APP_FIXER_API_KEY;
 
-const baseUrl = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${apiKey}`;
+const endpoint = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${apiKey}`;
 
 function App() {
   const [currencies, setCurrencies] = useState({});
 
   useEffect(() => {
-    fetch(baseUrl)
+    fetch(endpoint)
       .then((res) => res.json())
       .then((data) => {
         const { symbols } = data;
-        setCurrencies(symbols);
+        setCurrencies(filterCurrencies(symbols));
       });
   }, []);
 
