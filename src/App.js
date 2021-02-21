@@ -27,11 +27,12 @@ function App() {
   const [selectedBaseCurrency, setSelectedBaseCurrency] = useState({
     iso: "USD",
     fx: {},
+    typed: 0,
   });
   const [
     selectedDestinationCurrency,
     setSelectedDestinationCurrency,
-  ] = useState({ iso: "EUR", fx: {} });
+  ] = useState({ iso: "EUR", fx: {}, typed: 0 });
 
   const contextStore = {
     currencies,
@@ -53,7 +54,10 @@ function App() {
         // const { symbols } = data;
         setCurrencies(filterCurrencies(symbols));
         const stateSelectedCurrency = await grabFx(selectedBaseCurrency.iso);
-        setSelectedBaseCurrency(stateSelectedCurrency);
+        setSelectedBaseCurrency({
+          ...selectedBaseCurrency,
+          ...stateSelectedCurrency,
+        });
       } catch (error) {
         console.log(error.message);
       }

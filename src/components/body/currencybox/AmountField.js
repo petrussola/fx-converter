@@ -19,10 +19,18 @@ const StyledForm = styled.form`
 `;
 
 export default function AmountField({ defaultCurrency }) {
+  const changeAmount = (e) => {
+    console.log(parseInt(e.target.value));
+  };
   return (
     <StyledForm>
       <label htmlFor={defaultCurrency}>Enter amount</label>
-      <input type="number" id={defaultCurrency} />
+      <input
+        type="number"
+        id={defaultCurrency}
+        placeholder={0}
+        onChange={changeAmount}
+      />
     </StyledForm>
   );
 }

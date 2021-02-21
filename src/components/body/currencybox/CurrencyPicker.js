@@ -47,7 +47,10 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
       if (name === "baseCurrency") {
         // call helper function that will call the fx api and return new selected currency state
         const newSelectedCurrency = await grabFx(e.target.value);
-        setSelectedBaseCurrency(newSelectedCurrency);
+        setSelectedBaseCurrency({
+          ...selectedBaseCurrency,
+          ...newSelectedCurrency,
+        });
       } else {
         setSelectedDestinationCurrency({
           ...selectedDestinationCurrency,
