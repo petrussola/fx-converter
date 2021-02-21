@@ -8,7 +8,10 @@ import SymbolOption from "./currencypicker/SymbolOption";
 import { fxContext } from "../../../context/fx";
 
 // helpers
-import { convertCurrenciesIntoArray, grabFx } from "../../../helpers/helpers";
+import {
+  convertCurrenciesIntoArray,
+  grabFx,
+} from "../../../helpers/helpers";
 
 const StyledDiv = styled.div`
   display: flex;

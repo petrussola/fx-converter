@@ -67,3 +67,7 @@ export const grabFx = async (selectedBaseCurrency) => {
 };
 
 export const titles = ["currency converter", "current exchange rates"];
+
+export const convertInputAmount = (amount, fx) => {
+  return (amount * fx).toFixed(4)
+};

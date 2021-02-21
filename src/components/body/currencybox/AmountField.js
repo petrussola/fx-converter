@@ -4,6 +4,9 @@ import styled from "styled-components";
 // context
 import { fxContext } from "../../../context/fx";
 
+// helpers
+import { convertInputAmount } from "../../../helpers/helpers";
+
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -30,14 +33,18 @@ export default function AmountField({ defaultCurrency, name }) {
   } = useContext(fxContext);
 
   const changeAmount = (e) => {
-    const amount = parseInt(e.target.value);
+    // convert iput amount to number
+    const inputAmount = parseInt(e.target.value);
+    // grab fx of destination currency from state
+    const fx = selectedBaseCurrency.fx[selectedDestinationCurrency.iso];
+    // call helper function, returns number with 4 decimals
+    const destinationAmount = convertInputAmount(inputAmount, fx);
+    // track amount typed in the base currency in state and converted amount in destination currency state
     if (name === "baseCurrency") {
-      setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: amount });
+      setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: inputAmount });
       setSelectedDestinationCurrency({
         ...selectedDestinationCurrency,
-        typed: (
-          amount * selectedBaseCurrency.fx[selectedDestinationCurrency.iso]
-        ).toFixed(4),
+        typed: destinationAmount,
       });
     }
   };
