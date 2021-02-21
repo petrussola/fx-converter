@@ -11,6 +11,7 @@ import { fxContext } from "../../../context/fx";
 import {
   convertCurrenciesIntoArray,
   grabFx,
+  convertInputAmount,
 } from "../../../helpers/helpers";
 
 const StyledDiv = styled.div`
@@ -55,9 +56,14 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
           ...newSelectedCurrency,
         });
       } else {
+        const { destination } = convertInputAmount(
+          selectedBaseCurrency.typed,
+          selectedBaseCurrency.fx[e.target.value]
+        );
         setSelectedDestinationCurrency({
           ...selectedDestinationCurrency,
           iso: e.target.value,
+          typed: destination,
         });
       }
     } catch (error) {
