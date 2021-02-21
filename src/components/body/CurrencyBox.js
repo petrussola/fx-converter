@@ -21,7 +21,7 @@ export default function CurrencyBox({ defaultCurrency, name }) {
   return (
     <StyledDiv>
       <CurrencyPicker defaultCurrency={defaultCurrency} name={name} />
-      <AmountField defaultCurrency={defaultCurrency} />
+      <AmountField defaultCurrency={defaultCurrency} name={name} />
     </StyledDiv>
   );
 }

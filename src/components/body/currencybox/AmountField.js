@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+
+// context
+import { fxContext } from "../../../context/fx";
 
 const StyledForm = styled.form`
   display: flex;
@@ -18,18 +21,38 @@ const StyledForm = styled.form`
   }
 `;
 
-export default function AmountField({ defaultCurrency }) {
+export default function AmountField({ defaultCurrency, name }) {
+  const {
+    selectedBaseCurrency,
+    setSelectedBaseCurrency,
+    selectedDestinationCurrency,
+    setSelectedDestinationCurrency,
+  } = useContext(fxContext);
+
   const changeAmount = (e) => {
-    console.log(parseInt(e.target.value));
+    const amount = parseInt(e.target.value);
+    if (name === "baseCurrency") {
+      setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: amount });
+      setSelectedDestinationCurrency({
+        ...selectedDestinationCurrency,
+        typed:
+          amount * selectedBaseCurrency.fx[selectedDestinationCurrency.iso],
+      });
+    }
   };
   return (
     <StyledForm>
-      <label htmlFor={defaultCurrency}>Enter amount</label>
+      <label htmlFor={name}>Enter amount</label>
       <input
         type="number"
-        id={defaultCurrency}
+        id={name}
         placeholder={0}
         onChange={changeAmount}
+        value={
+          name === "baseCurrency"
+            ? selectedBaseCurrency.typed
+            : selectedDestinationCurrency.typed
+        }
       />
     </StyledForm>
   );
