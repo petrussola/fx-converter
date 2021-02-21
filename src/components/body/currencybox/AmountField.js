@@ -35,8 +35,9 @@ export default function AmountField({ defaultCurrency, name }) {
       setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: amount });
       setSelectedDestinationCurrency({
         ...selectedDestinationCurrency,
-        typed:
-          amount * selectedBaseCurrency.fx[selectedDestinationCurrency.iso],
+        typed: (
+          amount * selectedBaseCurrency.fx[selectedDestinationCurrency.iso]
+        ).toFixed(4),
       });
     }
   };
