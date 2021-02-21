@@ -37,7 +37,6 @@ export default function AmountField({ defaultCurrency, name }) {
     const fx = selectedBaseCurrency.fx[selectedDestinationCurrency.iso];
     // call helper function, returns number with 4 decimals
     const { base, destination } = convertInputAmount(e.target.value, fx);
-    debugger;
     // track amount typed in the base currency in state and converted amount in destination currency state
     if (name === "baseCurrency") {
       setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: base });
@@ -60,6 +59,7 @@ export default function AmountField({ defaultCurrency, name }) {
             ? selectedBaseCurrency.typed
             : selectedDestinationCurrency.typed
         }
+        disabled={name === "baseCurrency" ? false : true}
       />
     </StyledForm>
   );

@@ -69,10 +69,10 @@ export const grabFx = async (selectedBaseCurrency) => {
 export const titles = ["currency converter", "current exchange rates"];
 
 export const convertInputAmount = (amount, fx) => {
-  debugger
   let newAmount = null;
   if (amount === "") {
     newAmount = 0;
+    return { base: 0, destination: 0 };
   } else {
     newAmount = parseInt(amount);
   }
