@@ -10,7 +10,8 @@ import { fxContext } from "../../context/fx";
 const StyledDiv = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  padding-left: 200px;
   align-items: center;
 `;
 

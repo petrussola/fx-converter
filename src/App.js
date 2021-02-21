@@ -8,7 +8,7 @@ import Body from "./components/body/Body";
 import { fxContext } from "./context/fx";
 
 // helpers
-import { filterCurrencies, grabFx } from "./helpers/helpers";
+import { filterCurrencies, grabFx, titles } from "./helpers/helpers";
 
 const apiKey = process.env.REACT_APP_FIXER_API_KEY;
 
@@ -33,8 +33,6 @@ function App() {
     setSelectedDestinationCurrency,
   ] = useState({ iso: "EUR", fx: {} });
 
-  const changeBaseCurrency = () => {};
-
   const contextStore = {
     currencies,
     defaultCurrencyBase,
@@ -43,7 +41,7 @@ function App() {
     setSelectedBaseCurrency,
     selectedDestinationCurrency,
     setSelectedDestinationCurrency,
-    changeBaseCurrency,
+    titles,
   };
 
   useEffect(() => {

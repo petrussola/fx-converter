@@ -65,3 +65,5 @@ export const grabFx = async (selectedBaseCurrency) => {
     console.error(error.message);
   }
 };
+
+export const titles = ["currency converter", "current exchange rates"];

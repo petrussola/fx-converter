@@ -14,6 +14,7 @@ const StyledDiv = styled.div`
   height: 293px;
   width: 436px;
   border-radius: 10px;
+  margin-left: 35px;
 `;
 
 export default function CurrencyBox({ defaultCurrency, name }) {
