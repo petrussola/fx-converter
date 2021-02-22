@@ -3,9 +3,17 @@ import styled from "styled-components";
 
 // components
 import CurrencyBox from "./body/CurrencyBox";
+import Header from "./body/Header";
 
 // context
 import { fxContext } from "../context/fx";
+
+const StyledSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
 
 const StyledDiv = styled.div`
   display: flex;
@@ -22,15 +30,18 @@ export default function Body() {
   );
 
   return (
-    <StyledDiv>
-      <CurrencyBox
-        defaultCurrency={selectedBaseCurrency.iso}
-        name="baseCurrency"
-      />
-      <CurrencyBox
-        defaultCurrency={selectedDestinationCurrency.iso}
-        name="destinationCurrency"
-      />
-    </StyledDiv>
+    <StyledSection>
+      <Header />
+      <StyledDiv>
+        <CurrencyBox
+          defaultCurrency={selectedBaseCurrency.iso}
+          name="baseCurrency"
+        />
+        <CurrencyBox
+          defaultCurrency={selectedDestinationCurrency.iso}
+          name="destinationCurrency"
+        />
+      </StyledDiv>
+    </StyledSection>
   );
 }
