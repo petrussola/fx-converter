@@ -27,6 +27,8 @@ const apiKey = process.env.REACT_APP_FIXER_API_KEY;
 
 const endpointRate = `${process.env.REACT_APP_FIXER_BASE_URL}/latest?access_key=${apiKey}`;
 
+const endpointSymbols = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${apiKey}`;
+
 export const filterCurrencies = (symbols) => {
   // initialise empty object to save currencies that should be used in the app only
   const returnSymbols = {};
@@ -85,5 +87,27 @@ export const convertInputAmount = (amount, fx, name) => {
     // reverse fx formula is 1 / fx. Therefore, we return the reverse fx amount by multiplying typed amount times (1 / fx)
     destinationAmount = (newAmount * (1 / fx)).toFixed(4);
     return { base: destinationAmount, destination: newAmount };
+  }
+};
+
+export const grabInitialData = async (symbol) => {
+  try {
+    // fetch the currency symbols
+    const res = await fetch(endpointSymbols);
+    const { symbols } = await res.json();
+    const filteredCurrencies = filterCurrencies(symbols);
+    const stateSelectedCurrency = await grabFx(symbol);
+    debugger;
+    return { filteredCurrencies, stateSelectedCurrency };
+
+    // const { symbols } = data;
+    // setCurrencies(filterCurrencies(symbols));
+    // const stateSelectedCurrency = await grabFx(selectedBaseCurrency.iso);
+    // setSelectedBaseCurrency({
+    //   ...selectedBaseCurrency,
+    //   ...stateSelectedCurrency,
+    // });
+  } catch (error) {
+    console.log(error.message);
   }
 };

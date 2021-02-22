@@ -9,15 +9,12 @@ import { fxContext } from "./context/fx";
 
 // helpers
 import {
-  filterCurrencies,
-  grabFx,
   titles,
   convertInputAmount,
+  grabInitialData,
 } from "./helpers/helpers";
 
 const apiKey = process.env.REACT_APP_FIXER_API_KEY;
-
-const endpointSymbols = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${apiKey}`;
 
 function App() {
   const [currencies, setCurrencies] = useState({});
@@ -54,23 +51,18 @@ function App() {
   };
 
   useEffect(() => {
-    const grabInitialData = async () => {
-      try {
-        // fetch the currency symbols
-        const res = await fetch(endpointSymbols);
-        const { symbols } = await res.json();
-        // const { symbols } = data;
-        setCurrencies(filterCurrencies(symbols));
-        const stateSelectedCurrency = await grabFx(selectedBaseCurrency.iso);
-        setSelectedBaseCurrency({
-          ...selectedBaseCurrency,
-          ...stateSelectedCurrency,
-        });
-      } catch (error) {
-        console.log(error.message);
-      }
+    const fetchData = async () => {
+      const {
+        filteredCurrencies,
+        stateSelectedCurrency,
+      } = await grabInitialData(selectedBaseCurrency.iso);
+      setCurrencies(filteredCurrencies);
+      setSelectedBaseCurrency({
+        ...selectedBaseCurrency,
+        ...stateSelectedCurrency,
+      });
     };
-    grabInitialData();
+    fetchData();
   }, []);
 
   useEffect(() => {
