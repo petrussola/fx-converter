@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 // components
 import NavBar from "./components/NavBar";
-import Body from "./components/body/Body";
+import Body from "./components/Body";
 
 // context
 import { fxContext } from "./context/fx";

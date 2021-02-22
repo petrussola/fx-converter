@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 
 // components
-import CurrencyBox from "./CurrencyBox";
+import CurrencyBox from "./body/CurrencyBox";
 
 // context
-import { fxContext } from "../../context/fx";
+import { fxContext } from "../context/fx";
 
 const StyledDiv = styled.div`
   display: flex;

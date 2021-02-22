@@ -4,6 +4,14 @@ import styled from "styled-components";
 // components
 import CurrencyPicker from "./currencybox/CurrencyPicker";
 import AmountField from "./currencybox/AmountField";
+import CurrentFx from "./currencybox/CurrentFx";
+
+const StyledSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+`;
 
 const StyledDiv = styled.div`
   display: flex;
@@ -19,9 +27,12 @@ const StyledDiv = styled.div`
 
 export default function CurrencyBox({ defaultCurrency, name }) {
   return (
-    <StyledDiv>
-      <CurrencyPicker defaultCurrency={defaultCurrency} name={name} />
-      <AmountField defaultCurrency={defaultCurrency} name={name} />
-    </StyledDiv>
+    <StyledSection>
+      <StyledDiv>
+        <CurrencyPicker defaultCurrency={defaultCurrency} name={name} />
+        <AmountField defaultCurrency={defaultCurrency} name={name} />
+      </StyledDiv>
+      <CurrentFx name={name} />
+    </StyledSection>
   );
 }
