@@ -18,7 +18,6 @@ import {
 const apiKey = process.env.REACT_APP_FIXER_API_KEY;
 
 const endpointSymbols = `${process.env.REACT_APP_FIXER_BASE_URL}/symbols?access_key=${apiKey}`;
-const endpointRate = `${process.env.REACT_APP_FIXER_BASE_URL}/latest?access_key=${apiKey}`;
 
 function App() {
   const [currencies, setCurrencies] = useState({});
@@ -39,6 +38,8 @@ function App() {
     setSelectedDestinationCurrency,
   ] = useState({ iso: "EUR", fx: {}, typed: 0 });
 
+  const [whichCurrency, setWhichCurrency] = useState("baseCurrency");
+
   const contextStore = {
     currencies,
     defaultCurrencyBase,
@@ -48,6 +49,8 @@ function App() {
     selectedDestinationCurrency,
     setSelectedDestinationCurrency,
     titles,
+    whichCurrency,
+    setWhichCurrency,
   };
 
   useEffect(() => {
@@ -71,15 +74,20 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const { destination } = convertInputAmount(
+    const { base, destination } = convertInputAmount(
       selectedBaseCurrency.typed,
-      selectedBaseCurrency.fx[selectedDestinationCurrency.iso]
+      selectedBaseCurrency.fx[selectedDestinationCurrency.iso],
+      whichCurrency
     );
+    setSelectedBaseCurrency({
+      ...selectedBaseCurrency,
+      typed: base,
+    });
     setSelectedDestinationCurrency({
       ...selectedDestinationCurrency,
       typed: destination,
     });
-  }, [selectedBaseCurrency.iso]);
+  }, [selectedBaseCurrency.iso, selectedDestinationCurrency.iso]);
 
   if (!apiKey) {
     return <div>Please add Fixer's API Key</div>;

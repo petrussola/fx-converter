@@ -8,11 +8,7 @@ import SymbolOption from "./currencypicker/SymbolOption";
 import { fxContext } from "../../../context/fx";
 
 // helpers
-import {
-  convertCurrenciesIntoArray,
-  grabFx,
-  convertInputAmount,
-} from "../../../helpers/helpers";
+import { convertCurrenciesIntoArray, grabFx } from "../../../helpers/helpers";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -51,21 +47,16 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
       if (name === "baseCurrency") {
         // call helper function that will call the fx api and return new selected currency state
         const newSelectedCurrency = await grabFx(e.target.value);
+
         setSelectedBaseCurrency({
           ...selectedBaseCurrency,
           ...newSelectedCurrency,
         });
       } else {
-        // call helper function to convert whatever the input amount in base currency state
-        const { destination } = convertInputAmount(
-          selectedBaseCurrency.typed,
-          selectedBaseCurrency.fx[e.target.value]
-        );
-        // set converted amount so it displays on screen
+        // set selected currency in state, which will trigger useEffect and setting the amount
         setSelectedDestinationCurrency({
           ...selectedDestinationCurrency,
           iso: e.target.value,
-          typed: destination,
         });
       }
     } catch (error) {

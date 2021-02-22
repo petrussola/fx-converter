@@ -30,9 +30,14 @@ export default function AmountField({ defaultCurrency, name }) {
     setSelectedBaseCurrency,
     selectedDestinationCurrency,
     setSelectedDestinationCurrency,
+    setWhichCurrency,
   } = useContext(fxContext);
 
   const changeAmount = (e) => {
+    // track which currency is being manipulated in state
+    setWhichCurrency(
+      name === "baseCurrency" ? "baseCurrency" : "destinationCurrency"
+    );
     // grab fx of destination currency from state
     const fx = selectedBaseCurrency.fx[selectedDestinationCurrency.iso];
     // call helper function, returns number with 4 decimals. It is ready for when User typed on the left amount field or the right amount field
