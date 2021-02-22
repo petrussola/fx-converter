@@ -35,26 +35,14 @@ export default function AmountField({ defaultCurrency, name }) {
   const changeAmount = (e) => {
     // grab fx of destination currency from state
     const fx = selectedBaseCurrency.fx[selectedDestinationCurrency.iso];
-    // call helper function, returns number with 4 decimals
-    const { base, destination } = convertInputAmount(e.target.value, fx);
-    // track amount typed in the base currency in state and converted amount in destination currency state
-    if (name === "baseCurrency") {
-      setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: base });
-      setSelectedDestinationCurrency({
-        ...selectedDestinationCurrency,
-        typed: destination,
-      });
-    } else {
-      const amountTyped = parseInt(e.target.value);
-      setSelectedDestinationCurrency({
-        ...selectedDestinationCurrency,
-        typed: amountTyped,
-      });
-      setSelectedBaseCurrency({
-        ...selectedBaseCurrency,
-        typed: amountTyped * (1 / fx),
-      });
-    }
+    // call helper function, returns number with 4 decimals. It is ready for when User typed on the left amount field or the right amount field
+    const { base, destination } = convertInputAmount(e.target.value, fx, name);
+    // set base and destination currency amount
+    setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: base });
+    setSelectedDestinationCurrency({
+      ...selectedDestinationCurrency,
+      typed: destination,
+    });
   };
   return (
     <StyledForm>
@@ -69,7 +57,6 @@ export default function AmountField({ defaultCurrency, name }) {
             ? selectedBaseCurrency.typed
             : selectedDestinationCurrency.typed
         }
-        // disabled={name === "baseCurrency" ? false : true}
       />
     </StyledForm>
   );
