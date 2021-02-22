@@ -44,6 +44,16 @@ export default function AmountField({ defaultCurrency, name }) {
         ...selectedDestinationCurrency,
         typed: destination,
       });
+    } else {
+      const amountTyped = parseInt(e.target.value);
+      setSelectedDestinationCurrency({
+        ...selectedDestinationCurrency,
+        typed: amountTyped,
+      });
+      setSelectedBaseCurrency({
+        ...selectedBaseCurrency,
+        typed: amountTyped * (1 / fx),
+      });
     }
   };
   return (
@@ -59,7 +69,7 @@ export default function AmountField({ defaultCurrency, name }) {
             ? selectedBaseCurrency.typed
             : selectedDestinationCurrency.typed
         }
-        disabled={name === "baseCurrency" ? false : true}
+        // disabled={name === "baseCurrency" ? false : true}
       />
     </StyledForm>
   );
