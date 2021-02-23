@@ -98,14 +98,6 @@ export const grabInitialData = async (symbol) => {
     const filteredCurrencies = filterCurrencies(symbols);
     const stateSelectedCurrency = await grabFx(symbol);
     return { filteredCurrencies, stateSelectedCurrency };
-
-    // const { symbols } = data;
-    // setCurrencies(filterCurrencies(symbols));
-    // const stateSelectedCurrency = await grabFx(selectedBaseCurrency.iso);
-    // setSelectedBaseCurrency({
-    //   ...selectedBaseCurrency,
-    //   ...stateSelectedCurrency,
-    // });
   } catch (error) {
     console.log(error.message);
   }
