@@ -82,10 +82,12 @@ export const convertInputAmount = (amount, fx, name) => {
   if (name === "baseCurrency") {
     // convert typed amount into whatever the fx pulled from state
     destinationAmount = (newAmount * fx).toFixed(4);
+    debugger;
     return { base: newAmount, destination: destinationAmount };
   } else {
     // reverse fx formula is 1 / fx. Therefore, we return the reverse fx amount by multiplying typed amount times (1 / fx)
     destinationAmount = (newAmount * (1 / fx)).toFixed(4);
+    debugger;
     return { base: destinationAmount, destination: newAmount };
   }
 };
@@ -97,7 +99,6 @@ export const grabInitialData = async (symbol) => {
     const { symbols } = await res.json();
     const filteredCurrencies = filterCurrencies(symbols);
     const stateSelectedCurrency = await grabFx(symbol);
-    debugger;
     return { filteredCurrencies, stateSelectedCurrency };
 
     // const { symbols } = data;

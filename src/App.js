@@ -8,11 +8,7 @@ import Body from "./components/Body";
 import { fxContext } from "./context/fx";
 
 // helpers
-import {
-  titles,
-  convertInputAmount,
-  grabInitialData,
-} from "./helpers/helpers";
+import { titles, convertInputAmount, grabInitialData } from "./helpers/helpers";
 
 const apiKey = process.env.REACT_APP_FIXER_API_KEY;
 
@@ -66,11 +62,19 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // determine which currency is being typed and which one is being converted to
+    const currencyToConvert =
+      whichCurrency === "baseCurrency"
+        ? selectedBaseCurrency.typed
+        : selectedDestinationCurrency.typed;
+
+    // call helper function with amount that was typed by User (currencyToConvert). return amount for base currency and destination currency
     const { base, destination } = convertInputAmount(
-      selectedBaseCurrency.typed,
+      currencyToConvert,
       selectedBaseCurrency.fx[selectedDestinationCurrency.iso],
       whichCurrency
     );
+    // set states with new amounts
     setSelectedBaseCurrency({
       ...selectedBaseCurrency,
       typed: base,
