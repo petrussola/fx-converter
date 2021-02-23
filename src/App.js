@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 
 // components
 import NavBar from "./components/NavBar";
-import Body from "./components/Body";
+
+// routes
+import Routes from "./Routes";
 
 // context
 import { fxContext } from "./context/fx";
@@ -93,7 +95,7 @@ function App() {
     <div className="App">
       <fxContext.Provider value={contextStore}>
         <NavBar />
-        <Body />
+        <Routes />
       </fxContext.Provider>
     </div>
   );

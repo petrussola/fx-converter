@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
-const StyledDiv = styled.div`
+const StyledLink = styled(NavLink)`
+  text-decoration: none;
+  height: 100%;
   width: 297px;
   color: #ffffff;
   font-style: normal;
@@ -9,8 +12,27 @@ const StyledDiv = styled.div`
   font-size: 16px;
   line-height: 19px;
   letter-spacing: 0.08em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  &.selected {
+    background-color: #15255E;
+  }
 `;
 
 export default function Title({ title }) {
-  return <StyledDiv>{title.toUpperCase()}</StyledDiv>;
+  const pathTo =
+    title === "currency converter"
+      ? { path: "/", exact: true }
+      : { path: "/current-fx", exact: false };
+  return (
+    <StyledLink
+      to={pathTo.path}
+      exact={pathTo.exact}
+      activeClassName="selected"
+    >
+      {title.toUpperCase()}
+    </StyledLink>
+  );
 }
