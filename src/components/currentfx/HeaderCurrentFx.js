@@ -6,13 +6,10 @@ import { fxContext } from "../../context/fx";
 
 const StyledDiv = styled.div`
   margin-top: 83px;
-  margin-left: 35px;
   margin-bottom: 39px;
   h1 {
     font-size: 28px;
-  }
-  p {
-    font-size: 18px;
+    margin: 0;
   }
 `;
 

@@ -10,8 +10,8 @@ const StyledSection = styled.section`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 75%;
-  margin: 0 auto;
+  width: 931px;
+  margin-left: 235px;
 `;
 
 export default function CurrentFx() {

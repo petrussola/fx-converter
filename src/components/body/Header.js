@@ -2,13 +2,17 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledDiv = styled.div`
-  margin-left: 35px;
-  margin-bottom: 92px;
+  color: #333333;
+  margin-top: 83px;
   h1 {
     font-size: 28px;
+    margin: 0;
+    height: 33px;
   }
   p {
     font-size: 18px;
+    margin: 9px 0 0 0;
+    height: 21px;
   }
 `;
 

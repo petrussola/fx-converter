@@ -11,6 +11,10 @@ const StyledSection = styled.section`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
+  margin-top: 62px;
+  &.destination {
+    margin-left: 35px;
+  }
 `;
 
 const StyledDiv = styled.div`
@@ -22,12 +26,13 @@ const StyledDiv = styled.div`
   height: 293px;
   width: 436px;
   border-radius: 10px;
-  margin-left: 35px;
 `;
 
 export default function CurrencyBox({ defaultCurrency, name }) {
   return (
-    <StyledSection>
+    <StyledSection
+      className={name === "destinationCurrency" ? "destination" : ""}
+    >
       <StyledDiv>
         <CurrencyPicker defaultCurrency={defaultCurrency} name={name} />
         <AmountField defaultCurrency={defaultCurrency} name={name} />

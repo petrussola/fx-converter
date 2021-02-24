@@ -10,7 +10,6 @@ import { fxContext } from "../context/fx";
 const StyledDiv = styled.div`
   background-color: #2b439c;
   height: 62px;
-  width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

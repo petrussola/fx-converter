@@ -6,7 +6,7 @@ const StyledLink = styled(NavLink)`
   text-decoration: none;
   height: 100%;
   width: 297px;
-  color: #ffffff;
+  color: #8194db;
   font-style: normal;
   font-weight: 900;
   font-size: 16px;
@@ -17,7 +17,8 @@ const StyledLink = styled(NavLink)`
   justify-content: center;
   align-items: center;
   &.selected {
-    background-color: #15255E;
+    color: #ffffff;
+    background-color: #15255e;
   }
 `;
 

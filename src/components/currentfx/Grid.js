@@ -8,7 +8,7 @@ import GridCell from "./gridcell/GridCell";
 import { fxContext } from "../../context/fx";
 
 const StyledGrid = styled.div`
-  width: 100%;
+  width: 921px;
   height: 781px;
   border-radius: 6px;
   display: grid;
@@ -16,6 +16,7 @@ const StyledGrid = styled.div`
   grid-template-rows: repeat(17, 1fr);
   justify-items: stretch;
   align-items: stretch;
+  border: 1px solid #bfbfbf;
 
   div {
     display: flex;

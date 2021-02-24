@@ -6,7 +6,8 @@ import { fxContext } from "../../../context/fx";
 
 const StyledDiv = styled.div`
   font-size: 18px;
-  margin: 18px 0 0 70px;
+  margin-top: 18px;
+  margin-left: 39px;
 `;
 
 export default function CurrentFx({ name }) {
