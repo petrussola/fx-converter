@@ -42,7 +42,6 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
   const symbols = convertCurrenciesIntoArray(currencies);
 
   const selectCurrency = async (e) => {
-    debugger;
     try {
       // if selector is base currency, set selected base currency state, which comes already shaped as {iso: {{base currency}}, fx: {fx to other symbols}}
       if (name === "baseCurrency") {

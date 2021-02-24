@@ -1,23 +1,23 @@
 // symbols that are accepted in the fx app. Otherwise, we have a very large list returned by the FX open API
 
 const acceptedSymbols = {
-  EUR: true,
-  JPY: true,
-  BGN: true,
-  CZK: true,
-  GBP: true,
-  HUF: true,
-  PLN: true,
-  RON: true,
-  SEK: true,
-  CHF: true,
-  ISK: true,
-  NOK: true,
-  HRK: true,
-  RUB: true,
-  TRY: true,
-  AUD: true,
-  USD: true,
+  EUR: "€",
+  JPY: "¥",
+  BGN: "Лв",
+  CZK: 'Kč',
+  GBP: '£',
+  HUF: 'Ft',
+  PLN: 'zł',
+  RON: 'lei',
+  SEK: 'kr',
+  CHF: 'CHF',
+  ISK: 'kr',
+  NOK: 'kr',
+  HRK: 'kn',
+  RUB: '₽',
+  TRY: '₺',
+  AUD: "A$",
+  USD: "$",
 };
 
 const listCurrencies =
@@ -101,4 +101,8 @@ export const grabInitialData = async (symbol) => {
   } catch (error) {
     console.log(error.message);
   }
+};
+
+export const returnCurrencySymbol = (state) => {
+  return acceptedSymbols[state.iso];
 };

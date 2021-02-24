@@ -5,7 +5,10 @@ import styled from "styled-components";
 import { fxContext } from "../../../context/fx";
 
 // helpers
-import { convertInputAmount } from "../../../helpers/helpers";
+import {
+  convertInputAmount,
+  returnCurrencySymbol,
+} from "../../../helpers/helpers";
 
 const StyledForm = styled.form`
   display: flex;
@@ -13,6 +16,18 @@ const StyledForm = styled.form`
   justify-content: space-evenly;
   align-items: flex-start;
   margin: 0 auto;
+  position: relative;
+  span {
+    position: absolute;
+    padding: 21px 0;
+    width: 340px;
+    font-size: 21px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    top: 20px;
+    color: #3a3b3f;
+  }
   input {
     width: 340px;
     height: 62px;
@@ -49,9 +64,17 @@ export default function AmountField({ defaultCurrency, name }) {
       typed: destination,
     });
   };
+
+  const passedState =
+    name === "baseCurrency"
+      ? selectedBaseCurrency
+      : selectedDestinationCurrency;
+  const symbol = returnCurrencySymbol(passedState);
+
   return (
     <StyledForm>
       <label htmlFor={name}>Enter amount</label>
+      <span class="test">{symbol}</span>
       <input
         type="number"
         id={name}
