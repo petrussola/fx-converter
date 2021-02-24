@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { fxContext } from "../../context/fx";
 
 const StyledDiv = styled.div`
-  padding-left: 235px;
+  margin-left: 35px;
   margin-bottom: 92px;
   h1 {
     font-size: 28px;
