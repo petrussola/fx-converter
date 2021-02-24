@@ -20,13 +20,14 @@ const StyledForm = styled.form`
   span {
     position: absolute;
     padding: 21px 0;
-    width: 340px;
+    width: 20px;
     font-size: 21px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     top: 20px;
     color: #3a3b3f;
+    right: 20px;
   }
   input {
     width: 340px;
@@ -74,7 +75,7 @@ export default function AmountField({ defaultCurrency, name }) {
   return (
     <StyledForm>
       <label htmlFor={name}>Enter amount</label>
-      <span class="test">{symbol}</span>
+      <span>{symbol}</span>
       <input
         type="number"
         id={name}
