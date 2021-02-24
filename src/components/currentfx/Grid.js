@@ -14,28 +14,28 @@ const StyledGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
   grid-template-rows: repeat(17, 1fr);
-  border: 1px solid red;
 
-  .item1 {
-    grid-column-start: 1;
-    grid-column-end: 4;
+  .header {
+    background: #f0f1f4;
   }
-
-  /* div {
-    border: 1px solid red;
-  } */
+  .div {
+    font-size: 18px;
+  }
 `;
 
 export default function Grid() {
   const { selectedBaseCurrency, currencies } = useContext(fxContext);
-  if (Object.keys(currencies).length === 0) {
+  if (
+    Object.keys(currencies).length === 0 ||
+    Object.keys(selectedBaseCurrency.fx).length === 0
+  ) {
     return <div>Loading...</div>;
   }
   return (
     <StyledGrid>
-      <div>Currency</div>
-      <div>Currency Name</div>
-      <div>{`Exchange Rate = 1 ${selectedBaseCurrency.iso}`}</div>
+      <div className="header">Currency</div>
+      <div className="header">Currency Name</div>
+      <div className="header">{`Exchange Rate = 1 ${selectedBaseCurrency.iso}`}</div>
       {Object.keys(currencies).map((iso, index) => {
         return <GridCell key={index} iso={iso} />;
       })}
