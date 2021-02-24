@@ -14,12 +14,25 @@ const StyledGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
   grid-template-rows: repeat(17, 1fr);
+  justify-items: stretch;
+  align-items: stretch;
+
+  div {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 43px;
+    letter-spacing: 0em;
+    text-align: left;
+    padding-left: 24px;
+  }
 
   .header {
     background: #f0f1f4;
-  }
-  .div {
-    font-size: 18px;
+    line-height: 21.09px;
+    font-weight: bold;
+    color: #333333;
   }
 `;
 
