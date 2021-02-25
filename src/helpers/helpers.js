@@ -4,18 +4,18 @@ const acceptedSymbols = {
   EUR: "€",
   JPY: "¥",
   BGN: "Лв",
-  CZK: 'Kč',
-  GBP: '£',
-  HUF: 'Ft',
-  PLN: 'zł',
-  RON: 'lei',
-  SEK: 'kr',
-  CHF: 'CHF',
-  ISK: 'kr',
-  NOK: 'kr',
-  HRK: 'kn',
-  RUB: '₽',
-  TRY: '₺',
+  CZK: "Kč",
+  GBP: "£",
+  HUF: "Ft",
+  PLN: "zł",
+  RON: "lei",
+  SEK: "kr",
+  CHF: "CHF",
+  ISK: "kr",
+  NOK: "kr",
+  HRK: "kn",
+  RUB: "₽",
+  TRY: "₺",
   AUD: "A$",
   USD: "$",
 };
@@ -71,10 +71,11 @@ export const grabFx = async (selectedBaseCurrency) => {
 export const titles = ["currency converter", "current exchange rates"];
 
 export const convertInputAmount = (amount, fx, name) => {
+  debugger;
   let newAmount = null;
   let destinationAmount = null;
   // prevents bug when user deletes full amount. Prevents from going NaN
-  if (amount === "") {
+  if (amount === "" || !fx) {
     newAmount = 0;
     return { base: 0, destination: 0 };
   }
@@ -82,6 +83,7 @@ export const convertInputAmount = (amount, fx, name) => {
   if (name === "baseCurrency") {
     // convert typed amount into whatever the fx pulled from state
     destinationAmount = (newAmount * fx).toFixed(4);
+
     return { base: newAmount, destination: destinationAmount };
   } else {
     // reverse fx formula is 1 / fx. Therefore, we return the reverse fx amount by multiplying typed amount times (1 / fx)

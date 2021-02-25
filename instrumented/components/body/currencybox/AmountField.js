@@ -66,23 +66,12 @@ export default function AmountField({ defaultCurrency, name }) {
     });
   };
 
-  const deletePlaceholder = () => {
-    if (name === "baseCurrency") {
-      setSelectedBaseCurrency({ ...selectedBaseCurrency, typed: "" });
-    } else {
-      setSelectedDestinationCurrency({
-        ...selectedDestinationCurrency,
-        typed: "",
-      });
-    }
-  };
-
   const passedState =
     name === "baseCurrency"
       ? selectedBaseCurrency
       : selectedDestinationCurrency;
-
   const symbol = returnCurrencySymbol(passedState);
+
   return (
     <StyledForm>
       <label htmlFor={name}>Enter amount</label>
@@ -90,10 +79,13 @@ export default function AmountField({ defaultCurrency, name }) {
       <input
         type="number"
         id={name}
-        placeholder={passedState.typed}
-        onFocus={deletePlaceholder}
+        placeholder={0}
         onChange={changeAmount}
-        value={passedState.typed}
+        value={
+          name === "baseCurrency"
+            ? selectedBaseCurrency.typed
+            : selectedDestinationCurrency.typed
+        }
       />
     </StyledForm>
   );

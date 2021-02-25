@@ -31,18 +31,10 @@ const StyledDiv = styled.div`
 export default function CurrencyBox({ defaultCurrency, name }) {
   return (
     <StyledSection
-      className={name === "destinationCurrency" ? "destination" : "base"}
+      className={name === "destinationCurrency" ? "destination" : ""}
     >
       <StyledDiv>
-        <CurrencyPicker
-          defaultCurrency={defaultCurrency}
-          name={name}
-          className={
-            name === "destinationCurrency"
-              ? "destination-selector"
-              : "base-selector"
-          }
-        />
+        <CurrencyPicker defaultCurrency={defaultCurrency} name={name} />
         <AmountField defaultCurrency={defaultCurrency} name={name} />
       </StyledDiv>
       <CurrentFx name={name} />

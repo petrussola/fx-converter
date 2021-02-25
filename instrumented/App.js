@@ -16,6 +16,13 @@ const apiKey = process.env.REACT_APP_FIXER_API_KEY;
 
 function App() {
   const [currencies, setCurrencies] = useState({});
+  const [defaultCurrencyBase, setDefaultCurrencyBase] = useState(
+    "United States Dollar (USD)"
+  );
+  const [defaultCurrencyDestination, setDefaultCurrencyDestination] = useState(
+    "Euro (EUR)"
+  );
+
   const [selectedBaseCurrency, setSelectedBaseCurrency] = useState({
     iso: "USD",
     fx: {},
@@ -30,6 +37,8 @@ function App() {
 
   const contextStore = {
     currencies,
+    defaultCurrencyBase,
+    defaultCurrencyDestination,
     selectedBaseCurrency,
     setSelectedBaseCurrency,
     selectedDestinationCurrency,
