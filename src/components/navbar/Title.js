@@ -16,9 +16,16 @@ const StyledLink = styled(NavLink)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1100px) {
+    text-align: center;
+    padding: 0 10px;
+  }
   &.selected {
     color: #ffffff;
     background-color: #15255e;
+    @media (max-width: 1100px) {
+      padding: 0 10px;
+    }
   }
 `;
 

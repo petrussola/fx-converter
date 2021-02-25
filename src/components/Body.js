@@ -13,15 +13,24 @@ const StyledSection = styled.section`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 931px;
+  max-width: 75%;
   margin-left: 235px;
+  @media (max-width: 1100px) {
+    min-width: 95%;
+    margin: 0 auto;
+    align-items: center;
+  }
 `;
 
 const StyledDiv = styled.div`
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  @media (max-width: 1100px) {
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 export default function Body() {
@@ -31,9 +40,9 @@ export default function Body() {
   );
 
   return (
-    <StyledSection>
+    <StyledSection className="main-section">
       <Header />
-      <StyledDiv>
+      <StyledDiv className='wrapper-boxes'>
         <CurrencyBox
           defaultCurrency={selectedBaseCurrency.iso}
           name="baseCurrency"

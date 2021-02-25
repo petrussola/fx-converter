@@ -71,7 +71,6 @@ export const grabFx = async (selectedBaseCurrency) => {
 export const titles = ["currency converter", "current exchange rates"];
 
 export const convertInputAmount = (amount, fx, name) => {
-  debugger;
   let newAmount = null;
   let destinationAmount = null;
   // prevents bug when user deletes full amount. Prevents from going NaN

@@ -17,6 +17,9 @@ const StyledForm = styled.form`
   align-items: flex-start;
   margin: 0 auto;
   position: relative;
+  @media (max-width: 1100px) {
+    width: 90%;
+  }
   span {
     position: absolute;
     padding: 21px 0;
@@ -38,6 +41,10 @@ const StyledForm = styled.form`
     border-radius: 6px;
     padding-left: 21px;
     margin-top: 13px;
+    @media (max-width: 1100px) {
+      /* margin: 0 auto; */
+      max-width: 100%;
+    }
   }
 `;
 

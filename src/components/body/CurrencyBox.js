@@ -14,6 +14,12 @@ const StyledSection = styled.section`
   margin-top: 62px;
   &.destination {
     margin-left: 35px;
+    @media (max-width: 1100px) {
+      margin-left: 0;
+    }
+  }
+  @media(max-width: 1100px) {
+    width: 100%;
   }
 `;
 
@@ -26,6 +32,12 @@ const StyledDiv = styled.div`
   height: 293px;
   width: 436px;
   border-radius: 10px;
+  @media (max-width: 1100px) {
+    margin: 0 auto;
+  }
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 export default function CurrencyBox({ defaultCurrency, name }) {

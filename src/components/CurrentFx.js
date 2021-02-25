@@ -12,6 +12,10 @@ const StyledSection = styled.section`
   align-items: flex-start;
   width: 931px;
   margin-left: 235px;
+  @media (max-width: 1100px) {
+    margin: 0 auto;
+    align-items: center;
+  }
 `;
 
 export default function CurrentFx() {
