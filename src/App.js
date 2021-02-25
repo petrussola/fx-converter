@@ -52,6 +52,7 @@ function App() {
       });
     };
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -76,6 +77,7 @@ function App() {
       ...selectedDestinationCurrency,
       typed: destination,
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBaseCurrency.iso, selectedDestinationCurrency.iso]);
 
   if (!apiKey) {
