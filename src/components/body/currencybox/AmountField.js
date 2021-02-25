@@ -25,7 +25,7 @@ const StyledForm = styled.form`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    top: 20px;
+    top: 33px;
     color: #3a3b3f;
     right: 20px;
   }
@@ -37,6 +37,7 @@ const StyledForm = styled.form`
     border: 1px solid #bfbfbf;
     border-radius: 6px;
     padding-left: 21px;
+    margin-top: 13px;
   }
 `;
 

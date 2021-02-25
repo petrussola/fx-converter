@@ -27,6 +27,7 @@ const StyledDiv = styled.div`
       no-repeat right #ffffff;
     -webkit-appearance: none;
     background-position-x: 330px;
+    margin-top: 13px;
   }
 `;
 
