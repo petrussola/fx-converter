@@ -46,6 +46,16 @@ const StyledForm = styled.form`
       max-width: 100%;
     }
   }
+  // hides default arrows for input[type=number]
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 `;
 
 export default function AmountField({ defaultCurrency, name }) {
