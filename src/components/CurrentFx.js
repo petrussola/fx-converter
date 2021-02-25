@@ -12,6 +12,7 @@ const StyledSection = styled.section`
   align-items: flex-start;
   width: 931px;
   margin-left: 235px;
+  margin-bottom: 35px;
   @media (max-width: 1100px) {
     margin: 0 auto;
     align-items: center;
