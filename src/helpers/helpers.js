@@ -93,7 +93,6 @@ export const convertInputAmount = (amount, fx, name) => {
 
 export const grabInitialData = async (symbol) => {
   try {
-    throw "test";
     // fetch the currency symbols
     const res = await fetch(endpointSymbols);
     const { symbols } = await res.json();
