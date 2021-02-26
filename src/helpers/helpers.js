@@ -64,7 +64,7 @@ export const grabFx = async (selectedBaseCurrency) => {
     // return new state ready to be set as such
     return { iso: data.base, fx: data.rates };
   } catch (error) {
-    console.error(error.message);
+    return { error: "Something went wrong. Please try again later" };
   }
 };
 
@@ -93,6 +93,7 @@ export const convertInputAmount = (amount, fx, name) => {
 
 export const grabInitialData = async (symbol) => {
   try {
+    throw "test";
     // fetch the currency symbols
     const res = await fetch(endpointSymbols);
     const { symbols } = await res.json();
@@ -100,7 +101,7 @@ export const grabInitialData = async (symbol) => {
     const stateSelectedCurrency = await grabFx(symbol);
     return { filteredCurrencies, stateSelectedCurrency };
   } catch (error) {
-    console.log(error.message);
+    return { error: "Something went wrong. Please try again later" };
   }
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 // components
 import NavBar from "./components/NavBar";
+import ErrorMessage from "./components/ErrorMessage";
 
 // routes
 import Routes from "./Routes";
@@ -27,6 +28,7 @@ function App() {
   ] = useState({ iso: "EUR", fx: {}, typed: 0 });
 
   const [whichCurrency, setWhichCurrency] = useState("baseCurrency");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const contextStore = {
     currencies,
@@ -37,22 +39,34 @@ function App() {
     titles,
     whichCurrency,
     setWhichCurrency,
+    errorMessage,
+    setErrorMessage,
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const {
-        filteredCurrencies,
-        stateSelectedCurrency,
-      } = await grabInitialData(selectedBaseCurrency.iso);
-      setCurrencies(filteredCurrencies);
-      setSelectedBaseCurrency({
-        ...selectedBaseCurrency,
-        ...stateSelectedCurrency,
-      });
+      try {
+        setErrorMessage("");
+        const {
+          filteredCurrencies,
+          stateSelectedCurrency,
+        } = await grabInitialData(selectedBaseCurrency.iso);
+        // if no data is returned, set error message as there is a problem with the api
+        if (!filteredCurrencies || !stateSelectedCurrency) {
+          setErrorMessage("Something went wrong. Please try again later");
+        } else {
+          setCurrencies(filteredCurrencies);
+          setSelectedBaseCurrency({
+            ...selectedBaseCurrency,
+            ...stateSelectedCurrency,
+          });
+        }
+      } catch (error) {
+        setErrorMessage("Something went wrong. Please try again later");
+      }
     };
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -77,7 +91,7 @@ function App() {
       ...selectedDestinationCurrency,
       typed: destination,
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBaseCurrency.iso, selectedDestinationCurrency.iso]);
 
   if (!apiKey) {
@@ -88,6 +102,7 @@ function App() {
     <div className="App">
       <fxContext.Provider value={contextStore}>
         <NavBar />
+        <ErrorMessage />
         <Routes />
       </fxContext.Provider>
     </div>

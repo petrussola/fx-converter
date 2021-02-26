@@ -28,7 +28,7 @@ const StyledDiv = styled.div`
     -webkit-appearance: none;
     background-position-x: 330px;
     margin-top: 13px;
-    @media(max-width: 1100px) {
+    @media (max-width: 1100px) {
       width: 100%;
     }
   }
@@ -41,6 +41,7 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
     setSelectedBaseCurrency,
     selectedDestinationCurrency,
     setSelectedDestinationCurrency,
+    setErrorMessage,
   } = useContext(fxContext);
 
   const symbols = convertCurrenciesIntoArray(currencies);
@@ -51,12 +52,17 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
       if (name === "baseCurrency") {
         // call helper function that will call the fx api and return new selected currency state
         const newSelectedCurrency = await grabFx(e.target.value);
-
-        setSelectedBaseCurrency({
-          ...selectedBaseCurrency,
-          ...newSelectedCurrency,
-        });
+        if (newSelectedCurrency.error) {
+          setErrorMessage("Something went wrong. Please try again later");
+        } else {
+          setErrorMessage("");
+          setSelectedBaseCurrency({
+            ...selectedBaseCurrency,
+            ...newSelectedCurrency,
+          });
+        }
       } else {
+        setErrorMessage("");
         // set selected currency in state, which will trigger useEffect and setting the amount
         setSelectedDestinationCurrency({
           ...selectedDestinationCurrency,
@@ -64,7 +70,7 @@ export default function CurrencyPicker({ defaultCurrency, name }) {
         });
       }
     } catch (error) {
-      console.log(error.message);
+      setErrorMessage("Something went wrong. Please try again later");
     }
   };
 
